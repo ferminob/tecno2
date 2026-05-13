@@ -4,6 +4,9 @@ let petalos3 = [];
 
 let petalosActual = [];
 
+let colorActual;
+let colorObjetivo;
+
 let totalCapas = 6;
 
 let estado = 0;
@@ -35,8 +38,9 @@ function setup() {
 
     createCanvas(1562, 1557);
 
-    // IMPORTANTE:
-    // inicializar buffers de TODAS las variantes
+    colorActual = color(21, 145, 106);
+    colorObjetivo = color(21, 145, 106);
+
     for (let p of petalos1) p.crearBuffer();
     for (let p of petalos2) p.crearBuffer();
     for (let p of petalos3) p.crearBuffer();
@@ -46,17 +50,9 @@ function setup() {
 
 function draw() {
 
-    if (varianteActual === 1) {
-        background(21, 145, 106);
-    }
+    colorActual = lerpColor(colorActual, colorObjetivo, 0.03);
 
-    if (varianteActual === 2) {
-        background(145, 21, 106);
-    }
-
-    if (varianteActual === 3) {
-        background(106, 21, 145);
-    }
+    background(colorActual);
 
     let multiplicador = keyIsDown(71) ? 2 : 1;
 
@@ -111,8 +107,20 @@ function reiniciarObra() {
         // por si reset limpia buffers
         p.crearBuffer();
     }
+    if (varianteActual === 1) {
+        petalosActual = petalos1;
+        colorObjetivo = color(21, 145, 106);
+    }
 
-    console.log('Obra reiniciada. Variante actual: ' + varianteActual);
+    if (varianteActual === 2) {
+        petalosActual = petalos2;
+        colorObjetivo = color(145, 21, 106);
+    }
+
+    if (varianteActual === 3) {
+        petalosActual = petalos3;
+        colorObjetivo = color(106, 21, 145);
+    }
 }
 
 function keyPressed() {
