@@ -54,7 +54,25 @@ function draw() {
 
     background(colorActual);
 
-    let multiplicador = keyIsDown(71) ? 2 : 1;
+    let multiplicador = 0.5;
+    switch (event.key) {
+        case 'ArrowUp':
+            console.log('aumenta velocidad');
+            if (multiplicador < 2)
+            {
+                multiplicador = multiplicador + 0.05;
+            }
+            // Add action for Up here
+            break;
+        case 'ArrowDown':
+            console.log('disminuye velocidad');
+            if (multiplicador > 0) 
+            {
+                multiplicador = multiplicador - 0.05;
+            }
+            // Add action for Down here
+            break;
+    }
 
     // SOLO dibuja las capas visibles
     for (let i = 0; i < capasVisibles; i++) {
